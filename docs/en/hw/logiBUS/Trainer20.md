@@ -64,8 +64,9 @@ same number (I1↔AnalogInput_I1 etc.) — only one of the two functions can be 
 All of them are on ADC1; ADC2 is not routed to the CoreBoard's pin header.
 
 **ESP32-S31 ADC (still to be verified):** The S31 has only *one* attenuation setting
-(`SOC_ADC_ATTEN_NUM` = 1, `ADC_ATTEN_DB_0`) and returns raw values from a 17-bit field that,
-according to ESP-IDF, is a weighted sum of the comparator bits (maximum 4393). The raw full scale and
+(`SOC_ADC_ATTEN_NUM` = 1, `ADC_ATTEN_DB_0`) and reports the result as the weighted sum of
+17 redundant comparator bits (non-uniform weights, according to ESP-IDF), so the maximum code is
+**4393** — it is not a 17-bit code. The raw full scale and
 the measuring range in volts are still to be checked on hardware; the values documented for the
 `logiBUS_AI_*` blocks (0–4095) apply to ESP32-P4/ESP32-S3.
 

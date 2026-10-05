@@ -66,8 +66,9 @@ eine der beiden Funktionen gleichzeitig genutzt werden. Alle liegen auf ADC1; AD
 Stiftleiste des CoreBoards nicht herausgeführt.
 
 **ADC des ESP32-S31 (noch zu verifizieren):** Der S31 kennt nur *eine* Dämpfungsstufe
-(`SOC_ADC_ATTEN_NUM` = 1, `ADC_ATTEN_DB_0`) und liefert Rohwerte aus einem 17-Bit-Feld, das laut ESP-IDF
-eine gewichtete Summe der Komparator-Bits ist (maximal 4393). Der Roh-Vollausschlag und der
+(`SOC_ADC_ATTEN_NUM` = 1, `ADC_ATTEN_DB_0`) und liefert als Ergebnis die gewichtete Summe von
+17 redundanten Komparator-Bits (ungleichmäßige Gewichte, laut ESP-IDF); der maximale Code ist
+**4393** — es ist kein 17-Bit-Wert. Der Roh-Vollausschlag und der
 Messbereich in Volt werden auf der Hardware noch geprüft; die Angaben bei den
 `logiBUS_AI_*`-Bausteinen (0–4095) gelten für ESP32-P4/ESP32-S3.
 
