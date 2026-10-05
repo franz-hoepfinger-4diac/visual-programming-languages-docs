@@ -57,11 +57,11 @@ No second CAN bus (CAN2) on this board. Remove R83, see above.
 | AnalogInput_I5 | 45             | ADC1_CH3    |
 | AnalogInput_I6 | 44             | ADC1_CH2    |
 | AnalogInput_I7 | 43             | ADC1_CH1    |
-| AnalogInput_I8 | 42             | ADC1_CH0    |
+| AnalogInput_I8 | –              | (no analog input, see note below) |
 
-All eight analog inputs are combo pins that share the physical pin with the digital input of the
+AnalogInput_I1–I7 are combo pins that share the physical pin with the digital input of the
 same number (I1↔AnalogInput_I1 etc.) — only one of the two functions can be used per pin at a time.
-All of them are on ADC1; ADC2 is not routed to the CoreBoard's pin header.
+They are all on ADC1; ADC2 is not routed to the CoreBoard's pin header.
 
 **ESP32-S31 ADC (still to be verified):** The S31 has only *one* attenuation setting
 (`SOC_ADC_ATTEN_NUM` = 1, `ADC_ATTEN_DB_0`) and reports the result as the weighted sum of
@@ -81,7 +81,7 @@ the measuring range in volts are still to be checked on hardware; the values doc
 | Input_I5 | 45             |
 | Input_I6 | 44             |
 | Input_I7 | 43             |
-| Input_I8 | 42             |
+| Input_I8 | 40             |
 
 ### Encoder
 
@@ -108,7 +108,7 @@ All eight outputs are PWM and servo capable.
 
 | Output:    | PIN (ESP32S31) |
 |------------|----------------|
-| Output_Q01 | 40             |
+| Output_Q01 | 42             |
 | Output_Q02 | 39             |
 | Output_Q03 | 38             |
 | Output_Q04 | 37             |
@@ -118,6 +118,11 @@ All eight outputs are PWM and servo capable.
 | Output_Q08 | 21 (SDIO_D1)   |
 
 Q07 and Q08 share their pins with the SD card slot, see above.
+
+!!! note "Q01 and I8 are crossed on the board"
+    On the Trainer20 the terminals of Q01 and I8 are wired crossed: Q01 is on GPIO42, I8 on GPIO40.
+    GPIO40 is not an ADC pin, so there is no analog input for I8 (AnalogInput_I8 is not assigned).
+    I8 is the joystick button and is only used digitally.
 
 ### RGB LED
 
